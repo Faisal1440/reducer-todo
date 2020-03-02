@@ -1,19 +1,27 @@
 import React from "react"
 
-const Form= ({ handleSubmit, handleChange, newTodo}) => {
+const FormList= ({ toDo, toggleCompleted, clearCompleted}) => {
+    
+    console.log(toDo) //     <-------TEST PLEZ 
+
     return (
-        <>
-        <form onSubmit={handleSubmit}>
-            <input
-                type="text"
-                value={newTodo}
-                name="newTodo"
-                onChange={handleChange}
-            />
-            <button>ADD NOW</button>
-        </form>
-        </>
+        <div>
+            <button onClick={clearCompleted}>Clear completed</button>
+            <div>
+                {toDo.map(index => {
+                    return(
+                        <div
+                            className={"chore " + (index.completed ? "done" : "")}
+                            key={index.id}
+                            onClick={() => toggleCompleted(index.id)}
+                            >
+                            <input type="checkbox" checked={index.completed} />
+                        </div>
+                    )
+                })}
+            </div>
+        </div>
     )
 }
 
-export default Form; 
+export default FormList

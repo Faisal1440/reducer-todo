@@ -3,7 +3,7 @@ export const initialState = {
         {
             item: "Build a To-Do List",
             completed: false,
-            id: Date.now
+            id: Date.now()
           }
     ]
   }
@@ -32,7 +32,7 @@ export const initialState = {
 
         case "CLEAR_COMPLETED":
             return { ...state, toDo: state.toDo.filter(chore => !chore.completed) }
-            
+
         default:
             return state
         }

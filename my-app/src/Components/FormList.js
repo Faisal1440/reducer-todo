@@ -15,7 +15,9 @@ const FormList= ({ toDo, toggleCompleted, clearCompleted}) => {
                             key={index.id}
                             onClick={() => toggleCompleted(index.id)}
                             >
+                            
                             <input type="checkbox" checked={index.completed} />
+                            <label>{index.item}</label>
                         </div>
                     )
                 })}

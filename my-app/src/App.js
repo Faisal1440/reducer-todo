@@ -1,0 +1,56 @@
+import React, { useReducer, useState } from 'react'
+import { initialState, reducer } from "./reducers"
+import FormList from "./Components/FormList"
+import Form from "./Components/Form"
+// import App from "./scr/App.css"
+
+function App() {
+
+    const [newListItem, setListItem] = useState("")
+    const [state, dispatch] = useReducer(reducer, initialState)
+
+    const handleChange = event => { // < ---- PREVENT FROM REFRESH BOTH 
+      event.preventDefault()
+      setListItem(event.target.value)
+    }
+
+    const handleSubmit = event => {
+      event.preventDefault()
+      dispatch({ type: "ADD_TODO", payload: newListItem })
+    }
+
+    const toggleCompleted = id => {
+      dispatch({ type: "TOGGLE_COMPLETED", payload: id })
+    }
+    const clearCompleted = () => {
+      dispatch({ type: "CLEAR_COMPLETED" })
+    }
+
+    return (
+
+      <div className="wrapper">
+        <div className="todoList">
+
+          <div className="header">
+            <h1> MY ToDo APP:</h1>
+            <Form
+              handleSubmit={handleSubmit}
+              handleChange={handleChange}
+              newListItem={newListItem}
+            />
+          </div>
+          
+          <FormList
+            clearCompleted={clearCompleted}
+            toggleCompleted={toggleCompleted}
+            toDo={state.toDo}
+          />
+
+        </div>
+      </div>
+    )
+
+
+}
+
+export default App
